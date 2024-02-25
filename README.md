@@ -57,3 +57,7 @@ Run the server with
 FLASK_ENV=prod python3 main.py
 ```
 
+
+
+------
+trigger an update
