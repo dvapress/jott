@@ -6,6 +6,8 @@ from textwrap import dedent
 
 app = Flask(__name__)
 
+db_volume="/volumed"
+
 # Singleton pattern (because threading)
 def get_db(name):
     if app.config["DEBUG"]:
@@ -13,7 +15,9 @@ def get_db(name):
     db = getattr(g, "_database_{}".format(name), None)
     db_list = getattr(g, "_db_list", [])
     if db is None:
-        db = g._database = sqlite3.connect("{}.db".format(name))
+        # db = g._database = sqlite3.connect("{}.db".format(name))
+        db_name = os.path.join(db_volume, f"{name}.db")
+        db = g._database = sqlite3.connect(db_name)
         db_list.append(name)
     return db
 
