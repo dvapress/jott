@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request, g, abort, redirect, url_for
 import sqlite3
 import time
@@ -380,4 +381,6 @@ def close_connection(exception):
         db.close()
 
 
-app.run("0.0.0.0", port=8000 if app.config["DEBUG"] else 5000)
+# app.run("0.0.0.0", port=8000 if app.config["DEBUG"] else 5000)
+if __name__ == '__main__':
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
